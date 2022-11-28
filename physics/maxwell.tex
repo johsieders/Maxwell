@@ -25,7 +25,7 @@
 % \usepackage{graphicx}
 % \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
-\title{Maxwell Equations Explained}
+\title{Maxwell's Equations Explained}
 \author{Johannes Siedersleben}
 \date{December 2022}
 \setlength\parindent{0pt}
@@ -34,105 +34,96 @@
 \maketitle
 
 \begin{abstract}
-This paper explains the Maxwell Equations and how they are derived.
+This paper explains Maxwell's Equations and how they are derived.
 \end{abstract}
 
 \section{Introduction}
 
 Your introduction goes here!
 
-\section{Prerequisites}
-Our aim is to derive electrodynamics from a minimal set of definitions and assumptions.
-
-Electrodynamics starts with the time dependent \emph{electric potential} $V$ about which no assumptions are made. The \emph{vector potential} $A$ is the gradient of $V$. The \emph{magnetic field} $B$ is the curl of $A$, the \emph{electric field} $E$ the negative time derivative of $A$.  Adding another gradient to $A$ does affect $E$ but not $B$. The \emph{charge density} $\rho(t, x) \in \mathbb{R}$ is the divergence of the electric field and the \emph{current density} $j$ the curl of $B$ minus the time derivative of $E$. That's all there is to it. Note that we are only giving definitions, no interpretations. The names given happen to be the ones used in physics, but we do not attach any particular meaning to them.
-
-
 \section{Definitions}
+Our aim is to derive electrodynamics from a minimal set of definitions and assumptions. Electrodynamics starts with the time dependent \emph{electric potential} $V$ about which no assumptions are made. The \emph{vector potential} $A$ is the negative gradient of $V$. The \emph{magnetic field} $B$ is the curl of $A$, the \emph{electric field} $E$ the negative time derivative of $A$.  Adding a gradient to $A$ does affect $E$ but not $B$. The \emph{charge density} $\rho(t, x) \in \mathbb{R}$ is the divergence of the electric field and the \emph{current density} $j$ the curl of $B$ minus the time derivative of $E$. That's all there is to it. Note that we are only giving definitions, no interpretations. The names given happen to be the ones used in physics, but we do not attach any particular meaning to them. \\
 
-The \emph{charge} on a set \(\Omega \subseteq \mathbb{R}^3\) at time $t$ is given by
-
-\begin{equation}
-q(t, \Omega) = \int_{\Omega} \rho(t, x) dx
-\end{equation}
-
-The \emph{charge density} at $(t, x) \in \mathbb{R}^4$ is denoted by \(\rho(t, x)\).
-
-The \emph{current density} \(j\) is defined by
-
-\begin{equation}
-j = \rho \cdot v
-\end{equation}
-
-The \emph{electric potential} is denoted by \(V(t, x)\). 
+The \emph{electric potential} is denoted by \(V(t, x)\). \\
 
 The \emph{vector potential} is the negative gradient of $V$ with respect to $X$:
 
-\begin{equation}
+\begin{equation} \label{eq:vector_potential}
 A = -\nabla V
 \end{equation}
 
-The \emph{electric field} is given by
-
-\begin{equation}
-E = - \partial_t A
-\end{equation}
-
-Any gradient can be added to the electric field. 
-A common choice is
-
-\begin{equation}
-E = - (\nabla V + \partial_t A)   = A - \partial_t A
-\end{equation}
-
-The \emph{electric force} $F_e$ is given by
-
-\begin{equation}
-F_e = - e \cdot E
-\end{equation}
-
-
 The \emph{magnetic field} is given by
 
-\begin{equation}
+\begin{equation} \label{eq:magnetic_field}
 B = \nabla \times A
 \end{equation}
 
-Note that adding a gradient to $A$ doesn't affect the magnetic field $B$:
+Adding a gradient to $A$ doesn't affect the magnetic field, the curl of a gradient being zero. The \emph{electric field} is given by
 
-\begin{equation}
- B = \nabla \times A = \nabla \times (A + \nabla G) 
+\begin{equation} \label{eq:electric_field}
+E = - \partial_t A
 \end{equation}
 
-The \emph{magnetic force} $F_m$, also called \emph{Lorentz force}, which a magnetic field $B$ exerts on a charge $e$ moving at speed $v$ is given by:
+The \emph{charge density} is given by
 
-\begin{equation}
+\begin{equation} \label{eq:charge_density}
+\rho = \nabla \cdot E
+\end{equation}
+
+and the charge on a set $\Omega$ is given by
+
+\begin{equation} \label{eq:charge}
+Q(t, \Omega) = \int_{\Omega} \rho \: dV
+\end{equation}
+
+The \emph{current density} is given by
+
+\begin{equation} \label{eq:current_density}
+j = \nabla \times B - \partial_t E
+\end{equation}
+
+The electric field defines the \emph{electric force} $F_e$ exerted on a charge $e$
+
+\begin{equation} \label{eq:electric_force}
+F_e = - e \cdot E
+\end{equation}
+
+and the magnetic field defines the  \emph{magnetic force} $F_m$, also called \emph{Lorentz force}, exerted on a charge $e$ moving at speed $v$ relative to the magnetic field:
+
+\begin{equation} \label{eq:magnetic_force}
 F_m = - e \cdot (v \times B)
 \end{equation}
 
 
-\section{Maxwell Equations}
+
+
+\section{Maxwell's Equations}
 
 They come in two varieties. The clean one without constants and dimensions, useful for mathematical reasoning, reads as follows:
 
 \begin{equation}
-\label{eqn:M1}
+\label{eq:Maxwell1}
 \nabla \cdot E = \rho
 \end{equation}
 
 \begin{equation}
-\label{eqn:M2}
+\label{eq:Maxwell2}
 \nabla \times E = - \partial_t B
 \end{equation}
 
 \begin{equation}
-\label{eqn:M3}
+\label{eq:Maxwell3}
 \nabla \cdot B = 0
 \end{equation}
 
 \begin{equation}
-\label{eqn:M4}
+\label{eq:Maxwell4}
 \nabla \times B = j + \partial_t E
 \end{equation}
+
+
+Equation \ref{eq:Maxwell1} is definition \ref{eq:charge_density} of the charge density. Equation \ref{eq:Maxwell2} follows from definitions \ref{eq:magnetic_field} and \ref{eq:electric_field}.
+Equation \ref{eq:Maxwell3} is an immediate consequence of \ref{eq:magnetic_field}, and Equation \ref{eq:Maxwell4} is just \ref{eq:current_density}. \\
 
 Here is the detailed one with constants and dimensions one for all practical purposes:
 
@@ -155,6 +146,31 @@ Here is the detailed one with constants and dimensions one for all practical pur
 \label{eqn:M4c}
 c^2 \cdot \nabla \times B = j + \frac{\partial_t E}{\epsilon_0}
 \end{equation}
+
+
+\subsection{Scratch}
+
+Any gradient can be added to the electric field. 
+A common choice is
+
+\begin{equation}
+E = - (\nabla V + \partial_t A)   = A - \partial_t A
+\end{equation}
+
+The \emph{charge} on a set \(\Omega \subseteq \mathbb{R}^3\) at time $t$ is given by
+
+\begin{equation}
+q(t, \Omega) = \int_{\Omega} \rho(t, x) dx
+\end{equation}
+
+The \emph{charge density} at $(t, x) \in \mathbb{R}^4$ is denoted by \(\rho(t, x)\).
+
+The \emph{current density} \(j\) is defined by
+
+\begin{equation}
+j = \rho \cdot v
+\end{equation}
+
 
 \subsection{Maxwell 1}
 
