@@ -1,0 +1,352 @@
+\documentclass{article}
+
+
+
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+
+
+
+
+
+% \usepackage[english]{babel}
+% \usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+% \usepackage{amsmath}
+% \usepackage{amsfonts}
+% \usepackage{graphicx}
+% \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Maxwell Equations Explained}
+\author{Johannes Siedersleben}
+\date{December 2022}
+\setlength\parindent{0pt}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper explains the Maxwell Equations and how they are derived.
+\end{abstract}
+
+\section{Introduction}
+
+Your introduction goes here!
+
+\section{Prerequisites}
+Our aim is to derive electrodynamics from a minimal set of definitions and assumptions.
+
+Electrodynamics starts with the time dependent \emph{electric potential} $V$ about which no assumptions are made. The \emph{vector potential} $A$ is the gradient of $V$. The \emph{magnetic field} $B$ is the curl of $A$, the \emph{electric field} $E$ the negative time derivative of $A$.  Adding another gradient to $A$ does affect $E$ but not $B$. The \emph{charge density} $\rho(t, x) \in \mathbb{R}$ is the divergence of the electric field and the \emph{current density} $j$ the curl of $B$ minus the time derivative of $E$. That's all there is to it. Note that we are only giving definitions, no interpretations. The names given happen to be the ones used in physics, but we do not attach any particular meaning to them.
+
+
+\section{Definitions}
+
+The \emph{charge} on a set \(\Omega \subseteq \mathbb{R}^3\) at time $t$ is given by
+
+\begin{equation}
+q(t, \Omega) = \int_{\Omega} \rho(t, x) dx
+\end{equation}
+
+The \emph{charge density} at $(t, x) \in \mathbb{R}^4$ is denoted by \(\rho(t, x)\).
+
+The \emph{current density} \(j\) is defined by
+
+\begin{equation}
+j = \rho \cdot v
+\end{equation}
+
+The \emph{electric potential} is denoted by \(V(t, x)\). 
+
+The \emph{vector potential} is the negative gradient of $V$ with respect to $X$:
+
+\begin{equation}
+A = -\nabla V
+\end{equation}
+
+The \emph{electric field} is given by
+
+\begin{equation}
+E = - \partial_t A
+\end{equation}
+
+Any gradient can be added to the electric field. 
+A common choice is
+
+\begin{equation}
+E = - (\nabla V + \partial_t A)   = A - \partial_t A
+\end{equation}
+
+The \emph{electric force} $F_e$ is given by
+
+\begin{equation}
+F_e = - e \cdot E
+\end{equation}
+
+
+The \emph{magnetic field} is given by
+
+\begin{equation}
+B = \nabla \times A
+\end{equation}
+
+Note that adding a gradient to $A$ doesn't affect the magnetic field $B$:
+
+\begin{equation}
+ B = \nabla \times A = \nabla \times (A + \nabla G) 
+\end{equation}
+
+The \emph{magnetic force} $F_m$, also called \emph{Lorentz force}, which a magnetic field $B$ exerts on a charge $e$ moving at speed $v$ is given by:
+
+\begin{equation}
+F_m = - e \cdot (v \times B)
+\end{equation}
+
+
+\section{Maxwell Equations}
+
+They come in two varieties. The clean one without constants and dimensions, useful for mathematical reasoning, reads as follows:
+
+\begin{equation}
+\label{eqn:M1}
+\nabla \cdot E = \rho
+\end{equation}
+
+\begin{equation}
+\label{eqn:M2}
+\nabla \times E = - \partial_t B
+\end{equation}
+
+\begin{equation}
+\label{eqn:M3}
+\nabla \cdot B = 0
+\end{equation}
+
+\begin{equation}
+\label{eqn:M4}
+\nabla \times B = j + \partial_t E
+\end{equation}
+
+Here is the detailed one with constants and dimensions one for all practical purposes:
+
+\begin{equation}
+\label{eqn:M1c}
+\nabla \cdot E = \frac{\rho}{\epsilon_0}
+\end{equation}
+
+\begin{equation}
+\label{eqn:M2c}
+\nabla \times E = - \partial_t B
+\end{equation}
+
+\begin{equation}
+\label{eqn:M3c}
+\nabla \cdot B = 0
+\end{equation}
+
+\begin{equation}
+\label{eqn:M4c}
+c^2 \cdot \nabla \times B = j + \frac{\partial_t E}{\epsilon_0}
+\end{equation}
+
+\subsection{Maxwell 1}
+
+The integral form reads as follows:
+
+\begin{equation}
+\label{eq: m1_int_}
+\int_S \nabla \cdot E \: dV = \int_{S} \rho \: dV = Q(S)
+\end{equation}
+
+A charge $Q$ concentrated at the origin produces the electric field $E(x) = \lVert x \rVert $
+
+\begin{equation}
+\label{eq: m1_int}
+\int_{S_r} \nabla \cdot E \: dV = \int_{S} \rho \: dV = Q(S)
+\end{equation}
+
+Coulomb 
+
+Coulomb from Maxwell 1
+
+Maxwell 1 from Coulomb
+
+There are two steps:
+\begin{enumerate}
+    \item Coulomb's law: $F = \frac{q \cdot Q}{4\pi r^2}$
+    \item Additivity of the electric force: $q(\Omega) = \int_{\Omega} \rho dV$, which means that the force exerted by many small electric charges equals the sum of these forces. 
+\end{enumerate}
+
+\subsection{Maxwell 2}
+
+Differentiate $B = \nabla \times A$ with respect to time and replace $\dot A$ with $-E$.
+
+\subsection{Maxwell 3}
+This is the easiest one: The equality follows from the fact that $B$ is a curl: $B = \nabla \times A$.
+
+\subsection{Maxwell 4}
+
+This is what is going to happen:
+
+\begin{enumerate}
+    \item We show the equivalence of Maxwell 4 and the continuity equation
+    \item We derive Ampère's Law from Maxwell 4
+    \item We derive Maxwell's Law from Maxwell 4
+\end{enumerate}
+
+\subsubsection{Continuity Equation}
+The continuity equation is a useful interpretation of current and charge density. It tells us that the divergence of the current density equals the negative change of the charge density: 
+
+\begin{equation} \label{continuity}
+\nabla \cdot j + \frac{\partial}{\partial t} \rho = 0
+\end{equation}
+
+\emph{Conservation of charge} is an obvious consequence: The charge remains constant if and only if there is no current. There are (at least) two ways to get there: (1) With M1 given, the continuity equation is equivalent to M4. It is a mathematical consequence of the divergence and flux theorems. Let's start with (1): Applying the divergence operator to M4 and replacing $\nabla \cdot E$ with $\rho$ yields:
+
+\begin{align*}
+\nabla \cdot (\nabla \times B) &= \nabla \cdot (j + \frac{\partial E}{\partial t}) \\
+\Rightarrow 0 &= \nabla \cdot j + \nabla \cdot \frac{\partial E}{\partial t} \\
+&=  \nabla \cdot j + \frac{\partial}{\partial t} (\nabla \cdot E) \\
+&=  \nabla \cdot j + \frac{\partial}{\partial t} \rho          
+\end{align*}
+
+and we are done. (2) The other way round works as well. Replacing $\rho$ with $\nabla \cdot E$ in equation \ref{continuity} yields:
+
+\begin{equation*}
+0 = \nabla \cdot (j + \frac{\partial E}{\partial t})
+\end{equation*}
+
+which means that $j + \frac{\partial E}{\partial t}$ is the curl of some $F$:
+
+\begin{equation}
+\nabla \times F = j + \frac{\partial E}{\partial t}
+\end{equation}
+
+and that is M4 up to a gradient: From $\nabla \times B = \nabla \times F$ it follows that $B - F$ is the gradient of some $G$, so $B = F + \nabla G$, and this is as far as we can get.
+
+(2) Let's derive the continuity equation from the divergence and the flux theorems which represent two ways of computing the flow through a surface. Let $S$ be a surface in $\mathbb{R}^3$, $\rho(t, x) \in \mathbb{R}$ the density of some stuff at $(t, x)$, and $v(t, x) \in \mathbb{R}^3$ the speed with which the stuff is flowing. The product 
+
+\begin{equation}
+j(t, x) = v(t, x) \cdot \rho(t, x)
+\end{equation}
+
+is called the \emph{current density}. The flux theorem computes the current $I(t, S)$ through a surface $S$ in terms of $j$:
+
+\begin{equation} \label{flux}
+I(t, S) = \int_{S} (j \cdot \hat{n}) dS
+\end{equation}
+
+This equation follows from the fact that the vertical flux through a small surface $\Delta S$ with constant current density $j$ is simply $f = | \Delta S| \cdot j $ ($\hat n$ is the outward directed normal vector of $S$). Now, let $S$ be the border  $\partial \Omega$ of some volume $\Omega$. We get
+
+\begin{equation} \label{flux1}
+I(t, \partial \Omega) = \int_{\partial \Omega} (j \cdot \hat{n}) dS
+\end{equation}
+
+But the flow through $\partial \Omega$ is the negative change of the charge on $\Omega$:
+
+\begin{equation} \label{qchange}
+\dot q(t, \Omega) = \int_{\Omega} \dot \rho(t, x) dV = - \int_{\partial \Omega} (j \cdot \hat{n}) dS
+\end{equation}
+
+The flow represented by the right side of equation \ref{qchange} is outward directed. It therefore decreases the charge inside $\Omega$ which explains the minus sign. The divergence theorem provides an alternative representation of the same flow: 
+
+\begin{equation} \label{qchange1}
+- \int_{\Omega} (\nabla \cdot j) dV = - \int_{\partial \Omega} (j \cdot \hat{n}) dS
+\end{equation}
+
+So, for any $\Omega$ it holds that 
+
+\begin{equation} \label{qchange2}
+ \int_{\Omega} \dot \rho(t, x) dV = - \int_{\Omega} (\nabla \cdot j) dV
+\end{equation}
+
+which gives us the continuity equation once again:
+
+\begin{equation} \label{qchange3}
+\dot \rho(t, x) = - \nabla \cdot j
+\end{equation}
+
+\subsubsection{Ampère's Law}
+
+Let $S$ be a surface in $\mathbb{R}^3$ and assume the electric field constant: $\partial_t E = 0$.
+Applying Stokes theorem to Maxwell 4 yields:
+ 
+\begin{equation} \label{ampere0}
+\int_S ((\nabla \times B) \times \hat n) dS = \int_{\partial S} B ds
+= \int_S (j \cdot \hat n) dS
+\end{equation}
+
+which is Ampère's law:
+
+\begin{equation} \label{ampere}
+\int_{\partial S} B(t, x) ds = I(t, S)
+\end{equation}
+
+
+
+\subsubsection{Maxwell's Law}
+Maxwell's Law \\
+Apply $\partial$
+
+\subsection{Maxwell Equations in Tensor Form}
+
+some stuff goes here
+
+\subsection{Deriving Maxwell from Euler-Lagrange}
+
+some stuff goes here
+
+
+Here they are: 
+
+\begin{equation}
+A = \nabla  V =
+        \begin{bmatrix}
+            \partial_1 V \\
+            \partial_2 V \\
+            \partial_3 V \\
+        \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+B = \nabla \times A = 
+    \begin{bmatrix}
+       \partial_2 A_3 - \partial_3 A_2 \\
+       \partial_3 A_1 - \partial_1 A_3 \\
+       \partial_1 A_2 - \partial_2 A_1 \\
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+E = - \frac{\partial}{\partial t} A = 
+    \begin{bmatrix}
+        \partial_t A_1 \\
+        \partial_t A_2 \\
+        \partial_t A_3 \\
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\rho = \nabla \cdot E
+\end{equation}
+
+\begin{equation}
+j = \nabla \times B - \frac{\partial}{\partial t} E
+\end{equation}
+
+
+\bibliographystyle{alpha}
+\bibliography{maxwell}
+
+
+
+% \bibliography{physics}
+
+\end{document}

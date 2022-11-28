@@ -1,0 +1,265 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\vol{vol}
+
+
+\title{Vector Calculus Explained}
+\author{Johannes Siedersleben}
+\date{December 2022}
+\setlength\parindent{0pt}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper explains the essentials of vector calculus.
+\end{abstract}
+
+\section{Introduction}
+
+Your introduction goes here!
+
+$a = \supp{f}$
+
+$v = \vol{C}$
+
+$v = \det{C}$
+
+\section{Prerequisites}
+Our aim is to derive the essentials of vector calculus in a straightforward way.
+
+
+\section{Transformation of Variables}
+
+This presentation is inspired by \cite{Forster3}.
+
+
+We are going to investigate how integrals transform if we replace a variable $x$ with $g(x)$. We are going to proceed in three steps.
+
+
+
+\begin{theorem}
+ Let $C$ be the unit cube of $\mathbb{R}^{n}$, $A \in \mathbb{R}^{n\times n}$ an invertible matrix and 
+ $g : \mathbb{R}^{n} \longrightarrow \mathbb{R}^n$ a differentiable function whose Jacobian $\partial g$ is everywhere invertible. Then the following equations hold:
+
+\begin{equation} \label{eq: volume}
+\lvert A(C) \rvert =  \lvert \det A  \rvert \cdot \lvert C \rvert
+\end{equation}
+
+\begin{equation} \label{eq: linear_subst}
+ \int f(y) dy = \int (f\circ A) (x) \cdot  \lvert \det A \rvert dx
+\end{equation}
+
+\begin{equation} \label{eq: gen_subst}
+ \int f(y) dy = \int (f\circ g) (x) \cdot  \lvert \det \partial g  \rvert dx
+\end{equation}
+
+\begin{equation} \label{eq: gen_subst_short}
+ y = g(x) \implies dy = \lvert \det \partial g \rvert dx
+\end{equation}
+\end{theorem}
+
+Equation \ref{eq: volume} tells us how a given volume grows or shrinks on a large scale, and equation \ref{eq: gen_subst_short} how infinitesimal volume elements behave.
+
+
+\begin{proof}
+We start with equation \ref{eq: volume}. If $A$ is diagonal 
+
+\begin{equation*}
+    A = \left[
+    \begin{array}{ccc}
+        \lambda_{1}&   \\
+            & \ddots  \\
+            && \lambda_{n}
+    \end{array}
+\right]
+\end{equation*}
+
+then $A(C)$ is a cuboid with side lengths $\lambda_1, \hdots, \lambda_n$, and volume $\lvert A(C)\rvert = \prod_{i = 1}^{n} \lvert \lambda_i \rvert = \lvert \det A \rvert$. Note that only the absolute values of the eigenvalues contribute to the volume; the signs (indicating the quadrant) are irrelevant.
+If $A$ is unitary (a rotation), it leaves lengths, angles, and hence volumes unchanged. If $A$ is diagonalizable, then we have $A = U^T \Lambda U$ with a unitary matrix $U$ and the diagonal matrix $\Lambda$ of eigenvalues. Applying $A$ comes down to applying $U$ (volume unchanged), $\Lambda$ (volume multiplied by $\lvert \det \Lambda \rvert$) and $U^T$ (volume unchanged). So, equation \ref{eq: volume} is proven for diagonalizable matrices. Now, the matrix $A^TA$ is always diagonalizable, and its eigenvalues are positive. We will come up with two different unitary matrices $U$ and $V$ and a diagonal matrix $M$ such that
+
+\begin{equation} \label{eq: umv}
+A = UMV^T
+\end{equation}
+and 
+\begin{equation} \label{eq: detA}
+\det(A) = \det(M)
+\end{equation}
+
+Equation \ref{eq: detA} follows from \ref{eq: umv}, and we are done if the latter is shown. Now, there is a unitary matrix $V$ such that:
+
+\begin{equation} \label{eq:Lambda}
+\Lambda = V^{T}(A^TA)V
+\end{equation}
+
+We define two diagonal matrices
+
+\begin{equation*}
+\begin{array}{cc}
+\Lambda = \left[
+    \begin{array}{ccc}
+        \lambda_{1}&   \\
+            & \ddots  \\
+            && \lambda_{n}
+    \end{array}
+\right]
+& M = \left[
+    \begin{array}{ccc}
+        \sqrt{\lambda_{1}}&   \\
+            & \ddots  \\
+            && \sqrt{\lambda_{n}}
+    \end{array}
+\right]
+\end{array}
+\end{equation*}
+
+with the square roots in $M$ understood to be positive. It clearly holds that:
+
+\begin{equation*}
+M^2 = \Lambda
+\end{equation*}
+
+and, multiplying twice by $M^{-1}$:
+
+\begin{equation} \label{eq:Mlambda}
+I = M^{-1}\Lambda M^{-1}
+\end{equation}
+
+Plugging equation \ref{eq:Lambda} into \ref{eq:Mlambda} allows us to define another unitary matrix $U$:
+
+\begin{equation*}
+I = \underbrace{M^{-1} V^{T}A^T}_{U^T}\underbrace{AV M^{-1}}_{U}
+\end{equation*}
+
+and we get equation \ref{eq: umv}, the desired result:
+
+\begin{equation*}
+A = AVM^{-1}M V^T = UMV^T
+\end{equation*}
+
+We now turn to equation \ref{eq: linear_subst}. Let
+$ \mathcal{V} = \{(V_i, y_i) | i = 1, \hdots, N\}$
+be a partition of $\supp{f}$. Then $\mathcal{W} = \{(A^{-1}(V_i), A^{-1}y_i) | i = 1, \hdots, N\}$ is a partition of $A^{-1}(\supp{f})$.We set $W_i = A^{-1}(V_i)$ and $x_i = A^{-1}y_i $ so $V_i = A(W_i)$ and $y_i = Ax_i$. We get:
+
+
+\begin{equation*}
+\begin{split}
+\int f(y) dy &\approx \sum_{i = 1}^{N} f(y_i) \lvert V_i \rvert \\ 
+             &= \sum_{i = 1}^{N} f(Ax_i) \lvert A(W_i) \rvert \\
+             &= \sum_{i = 1}^{N} f(Ax_i) \lvert \det{A} \rvert \lvert W_i \rvert \\
+             &\approx \int f(Ax) \lvert \det{A} \rvert dx
+\end{split}              
+\end{equation*}
+
+\end{proof}
+
+Let's test equation \ref{eq: volume} on the simplest possible example: The matrix  
+$A = \begin{bmatrix}
+a_1 & b_1 \\
+a_2 & b_2
+\end{bmatrix}$
+maps the unit cube, in $\mathbb{R}^2$ a square with side length $ = 1$, to a parallelogram with surface
+$F = \lVert a \rVert \cdot \lVert b \rVert \cdot \sin\phi$,
+where $
+a = \begin{bmatrix}
+a_1 \\
+a_2
+\end{bmatrix}$,
+$b = \begin{bmatrix}
+b_1 \\
+b_2
+\end{bmatrix}$
+and $\phi$ is given by $\cos\phi = \frac{\lVert a \rVert \cdot \lVert b}{a \cdot b}$. We expect $F = \lvert \det A \rvert$, which turns out to be true: 
+
+
+\begin{equation*}
+\begin{split}
+F &= \lVert a \rVert \cdot \lVert b \rVert \cdot \sqrt{1 - \cos^2 \phi} \\
+  &= \sqrt{\lVert a \rVert \cdot \lVert b  \rVert - (a \cdot b)^2} \\
+  &= \sqrt{a_1^2 b_2^2 - 2 a_1a_2 b_1 b_2 + a_2^2 b_1^2} \\
+  &= \lvert a_1 b_2 - a_2 b_1 \rvert \\
+  &= \lvert \det A \rvert
+\end{split}
+\end{equation*}
+
+
+Let us now look at the polar coordinates in two dimensions. Here they are, with $r, \phi$ instead of $x_1, x_2$:
+
+\begin{align*}
+y &= g_2(r, \phi) \\
+\begin{bmatrix}
+y_1 \\
+y_2
+\end{bmatrix} &= \begin{bmatrix}
+r \cos \phi \\
+r \sin \phi
+\end{bmatrix} \\
+\partial g_2 &= \begin{bmatrix}
+\partial y_1 / \partial r &\partial y_1 / \partial \phi \\
+\partial y_2 / \partial r &\partial y_2 / \partial \phi \\
+\end{bmatrix} = \begin{bmatrix}
+\cos \phi & -r  \sin \phi \\
+\sin \phi & r  \cos \phi \\
+\end{bmatrix} \\
+\det \partial g_2 &= r
+\end{align*}
+
+
+The transformation $g_2$ maps the rectangle $[0, R] \times [0, \pi]$ onto the hemicycle $H_{R}$, so we get the surface
+
+\begin{equation*}
+\lvert H_{R} \rvert = \int_{H_{R}} dy =  \int_0^{R} (r \int_0^{\pi} d\phi) dr = \int_0^{R} r \pi dr = \frac{\pi}{2} R^2
+\end{equation*}
+
+The integrand $r \pi$ is the circumference of $H_{r}$, half the circumference of the full cycle.
+
+The same works in three dimensions: 
+\begin{align*}
+y &=  g_3(r, \phi, \theta) \\
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+y_3
+\end{bmatrix} &= \begin{bmatrix}
+r \sin \phi \cos \theta \\
+r \sin \phi \sin \theta \\
+r \cos \phi 
+\end{bmatrix} \\
+\partial g_3 &= \begin{bmatrix}
+\sin \phi \: \cos \theta & r  \cos \phi \: \cos \theta & -r \sin \phi \: \sin \theta \\
+\sin \phi \: \sin \theta & r  \cos \phi \: \sin \theta & r \sin \phi \: \cos \theta \\
+\cos \phi             & -r  \sin \phi            & 0
+\end{bmatrix} \\
+\det \partial g_3 &= r^2 \sin \phi
+\end{align*}
+
+The transformation $g_3$ maps the cuboid $[0, R] \times [0, \pi] \times [0, 2 \pi]$ onto the hemisphere $S_{R}$, so we get the volume
+
+\begin{equation*}
+\lvert S_{R} \rvert = \int_{S_{R}} dy =  \int_0^{R} (r^2 \int_0^{2\pi} \int_0^{\pi} \sin \phi \: d\phi d\theta) dr = \int_0^R 2 \pi r^2 dr = \frac{2 \pi}{3} R^3
+\end{equation*}
+
+The integrand $2 \pi r^2$ is the surface of  $S_{r}$, half the surface of the full sphere.
+
+\subsection{Euler-Lagrange}
+
+some stuff goes here
+
+
+\bibliographystyle{alpha}
+\bibliography{calculus}
+
+\end{document}
